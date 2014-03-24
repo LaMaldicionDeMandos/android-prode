@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Prode</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="mail_login">Use my mail address</string>
 
 </resources>

@@ -10,16 +10,18 @@ public class User implements Parcelable {
     private final String userId;
     private final UserType type;
     private final String username;
+    private final String device;
     private String name;
 
-    public User(String userId, String username, UserType type) {
-        this(userId, username, type, null);
+    public User(String userId, String username, UserType type, String device) {
+        this(userId, username, type, device, null);
     }
 
-    public User(String userId, String username, UserType type, String name) {
+    public User(String userId, String username, UserType type, String device, String name) {
         this.userId = userId;
         this.username = username;
         this.type = type;
+        this.device = device;
         this.name = name;
     }
 
@@ -42,6 +44,7 @@ public class User implements Parcelable {
         dest.writeString(this.userId);
         dest.writeInt(this.type == null ? -1 : this.type.ordinal());
         dest.writeString(this.username);
+        dest.writeString(this.device);
         dest.writeString(this.name);
     }
 
@@ -50,6 +53,7 @@ public class User implements Parcelable {
         int tmpType = in.readInt();
         this.type = tmpType == -1 ? null : UserType.values()[tmpType];
         this.username = in.readString();
+        this.device = in.readString();
         this.name = in.readString();
     }
 

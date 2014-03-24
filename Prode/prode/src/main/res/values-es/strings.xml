@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Prode</string>
+    <string name="action_settings">Configuraciones</string>
+    <string name="mail_login">Usar mi dirección de mail</string>
+</resources>
