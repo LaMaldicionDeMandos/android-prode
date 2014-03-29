@@ -4,4 +4,5 @@
     <string name="app_name">Prode</string>
     <string name="action_settings">Configuraciones</string>
     <string name="mail_login">Usar mi dirección de mail</string>
+    <string name="login_explain">Para agregarte en el ranking necesitas registrarte. Elige que método prefieres usar.</string>
 </resources>
