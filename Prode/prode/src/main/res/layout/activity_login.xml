@@ -35,6 +35,7 @@
             android:drawableLeft="@drawable/ic_action_mail"
             android:text="@string/mail_login"
             android:layout_marginTop="@dimen/login_margin"
-            android:background="@drawable/dark_button"/>
+            android:background="@drawable/dark_button"
+            android:onClick="loginWithMail"/>
     </LinearLayout>
 </RelativeLayout>

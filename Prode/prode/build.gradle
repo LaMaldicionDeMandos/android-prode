@@ -2,7 +2,7 @@ apply plugin: 'android'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.3"
+    buildToolsVersion '19.0.3'
 
     defaultConfig {
         minSdkVersion 11
@@ -10,6 +10,17 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+    productFlavors {
+        production {
+            packageName "org.pasut.prode"
+        }
+
+        testing {
+            packageName "org.pasut.prode.testing"
+        }
+    }
+
     buildTypes {
         release {
             runProguard false
@@ -23,5 +34,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:19.0.1'
     compile 'com.google.code.gson:gson:2.2.+'
     compile 'org.roboguice:roboguice:2.0'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.google.guava:guava:12.+'
+    compile 'com.google.android.gms:play-services:+'
 }
