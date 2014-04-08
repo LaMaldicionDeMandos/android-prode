@@ -36,4 +36,6 @@ dependencies {
     compile 'org.roboguice:roboguice:2.0'
     compile 'com.google.guava:guava:12.+'
     compile 'com.google.android.gms:play-services:+'
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 }

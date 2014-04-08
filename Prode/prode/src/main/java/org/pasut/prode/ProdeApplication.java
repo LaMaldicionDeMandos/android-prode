@@ -2,6 +2,8 @@ package org.pasut.prode;
 
 import android.app.Application;
 
+import com.parse.Parse;
+
 import roboguice.RoboGuice;
 
 /**
@@ -12,7 +14,9 @@ public class ProdeApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Parse.initialize(this, getString(R.string.parse_app_id), getString(R.string.parse_client_key));
         RoboGuice.setBaseApplicationInjector(this, RoboGuice.DEFAULT_STAGE,
                 RoboGuice.newDefaultRoboModule(this), new ProdeModule());
+
     }
 }

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="cliet_api">1034117776747-n8s9nrfos4cgf8s3pfotijbo5im25pmo.apps.googleusercontent.com</string>
+    <string name="parse_app_id">Z7wxEzjr86kbK6GXflzm4nztKvhwPvAkJRzNv5bf</string>
+    <string name="parse_client_key">OZlDy5JwYfuo8Rk9HUFXaYuUwjPzPpnHVpCf2mXJ</string>
+    <string name="parse_api_key">KWStYA6kRgeYIp3qxp0EWFsQkW9WA0sKSDSsLIWz</string>
 </resources>
