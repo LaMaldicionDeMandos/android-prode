@@ -4,6 +4,9 @@ import com.google.inject.AbstractModule;
 
 import org.pasut.prode.authentication.MailAuthentication;
 import org.pasut.prode.services.PreferencesService;
+import org.pasut.prode.services.UserService;
+import org.pasut.prode.services.implementation.DefaultUserService;
+import org.pasut.prode.utils.DeviceResolver;
 
 /**
  * Created by marcelo on 24/03/14.
@@ -11,7 +14,9 @@ import org.pasut.prode.services.PreferencesService;
 public class ProdeModule extends AbstractModule {
     @Override
     protected void configure() {
+        this.bind(DeviceResolver.class);
+        this.bind(UserService.class).to(DefaultUserService.class);
         this.bind(PreferencesService.class).to(org.pasut.prode.services.implementation.PreferencesService.class);
-        this.bind(MailAuthentication.class).toInstance(new MailAuthentication());
+        this.bind(MailAuthentication.class);
     }
 }

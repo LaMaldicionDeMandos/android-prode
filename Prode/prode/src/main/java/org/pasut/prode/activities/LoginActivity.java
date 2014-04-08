@@ -25,6 +25,6 @@ public class LoginActivity extends RoboActivity {
     }
 
     public void loginWithMail(View view) throws IOException, GoogleAuthException {
-        mailAuthentication.findUser(this);
+        mailAuthentication.login(this);
     }
 }
