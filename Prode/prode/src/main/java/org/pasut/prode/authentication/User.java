@@ -3,21 +3,30 @@ package org.pasut.prode.authentication;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.pasut.prode.entities.Entity;
+
 /**
  * Created by marcelo on 19/03/14.
  */
-public class User implements Parcelable {
+public class User implements Parcelable, Entity {
+    private final String _id;
     private final String userId;
+
     private final UserType type;
     private final String username;
     private final String device;
     private String name;
 
     public User(String userId, String username, UserType type, String device) {
-        this(userId, username, type, device, null);
+        this(null, userId, username, type, device, null);
     }
 
     public User(String userId, String username, UserType type, String device, String name) {
+        this(null, userId, username, type, device, name);
+    }
+
+    public User(String _id, String userId, String username, UserType type, String device, String name) {
+        this._id = _id;
         this.userId = userId;
         this.username = username;
         this.type = type;
@@ -41,6 +50,7 @@ public class User implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this._id);
         dest.writeString(this.userId);
         dest.writeInt(this.type == null ? -1 : this.type.ordinal());
         dest.writeString(this.username);
@@ -49,6 +59,7 @@ public class User implements Parcelable {
     }
 
     private User(Parcel in) {
+        this._id = in.readString();
         this.userId = in.readString();
         int tmpType = in.readInt();
         this.type = tmpType == -1 ? null : UserType.values()[tmpType];
@@ -66,4 +77,29 @@ public class User implements Parcelable {
             return new User[size];
         }
     };
+
+    @Override
+    public String getId() {
+        return _id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public UserType getType() {
+        return type;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getDevice() {
+        return device;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

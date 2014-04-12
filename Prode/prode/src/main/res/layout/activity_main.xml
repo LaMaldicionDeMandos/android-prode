@@ -9,6 +9,8 @@
     tools:context="org.pasut.prode.MainActivity">
 
     <TextView
+        android:text="MAIN_ACTIVITY"
+        android:textSize="24sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
