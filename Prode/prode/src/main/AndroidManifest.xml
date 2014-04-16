@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name="org.pasut.prode.activities.LoginActivity" />
-        <activity android:name="org.pasut.prode.MainActivity" />
+        <activity android:name=".activities.MainActivity" />
     </application>
 
 </manifest>

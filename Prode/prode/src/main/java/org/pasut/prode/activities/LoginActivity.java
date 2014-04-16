@@ -12,19 +12,22 @@ import org.pasut.prode.authentication.MailAuthentication;
 import java.io.IOException;
 
 import roboguice.activity.RoboActivity;
+import roboguice.inject.ContentView;
 
 import static org.pasut.prode.ActivityUtils.asFullScreen;
+import static org.pasut.prode.ActivityUtils.startActivityAndDestroy;
 
+@ContentView(R.layout.activity_login)
 public class LoginActivity extends RoboActivity {
     @Inject private MailAuthentication mailAuthentication;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         asFullScreen(this);
-        setContentView(R.layout.activity_login);
+        super.onCreate(savedInstanceState);
     }
 
     public void loginWithMail(View view) throws IOException, GoogleAuthException {
         mailAuthentication.login(this);
+        startActivityAndDestroy(this, MainActivity.class);
     }
 }
