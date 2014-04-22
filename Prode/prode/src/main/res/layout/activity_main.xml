@@ -12,6 +12,6 @@
                                    android:layout_height="match_parent">
     </org.pasut.prode.views.NoSwipableViewPager>
 
-    <include layout="@layout/view_leagues"/>
+    <include layout="@layout/view_fixtures"/>
 
 </android.support.v4.widget.DrawerLayout>
