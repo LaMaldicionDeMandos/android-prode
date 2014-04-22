@@ -1,22 +1,5 @@
-<android.support.v4.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="org.pasut.prode.activities.MainActivity"
-    >
-    <FrameLayout android:id="@+id/main_content"
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-        android:background="@android:color/darker_gray">
-
-    </FrameLayout>
-    <FrameLayout android:id="@+id/list_content"
-                 android:layout_width="280dp"
-                 android:layout_height="match_parent"
-                 android:layout_gravity="start"
-        android:background="@android:color/black">
-
-    </FrameLayout>
-</android.support.v4.widget.DrawerLayout>
+<org.pasut.prode.views.NoSwipableViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+                                   android:id="@+id/pager"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="match_parent">
+</org.pasut.prode.views.NoSwipableViewPager>

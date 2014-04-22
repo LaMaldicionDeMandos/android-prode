@@ -1,124 +1,94 @@
 package org.pasut.prode.activities;
 
-import android.content.res.Configuration;
+import android.app.ActionBar;
+import android.app.FragmentTransaction;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 
 import org.pasut.prode.R;
+import org.pasut.prode.fragments.CurrentFragment;
+import org.pasut.prode.fragments.MyCardsFragment;
+import org.pasut.prode.fragments.RankingFragment;
 
-import roboguice.activity.RoboActivity;
+import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 
 @ContentView(R.layout.activity_main)
-public class MainActivity extends RoboActivity {
+public class MainActivity extends RoboFragmentActivity implements ActionBar.TabListener {
+    private MainPagerAdapter pageAdapter;
 
-    @InjectView(R.id.container)
-    private DrawerLayout drawer;
+    private int[] tabTitles = new int[] {R.string.current_matches, R.string.my_cards, R.string.ranking};
 
-    @InjectView(R.id.list_content)
-    private View drawerView;
-
-    private ActionBarDrawerToggle drawerToggle;
-
+    @InjectView(R.id.pager)
+    private ViewPager pager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        configureDrawer();
-        configureActionBar();
+        pageAdapter = new MainPagerAdapter(getSupportFragmentManager());
+        final ActionBar actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            actionBar.setStackedBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.transparent_black)));
+        }
+        pager.setAdapter(pageAdapter);
+        pager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                // When swiping between different app sections, select the corresponding tab.
+                // We can also use ActionBar.Tab#select() to do this if we have a reference to the
+                // Tab.
+                actionBar.setSelectedNavigationItem(position);
+            }
+        });
+        actionBar.addTab(actionBar.newTab().setText(pageAdapter.getPageTitle(0)).setTabListener(this));
+        actionBar.addTab(actionBar.newTab().setText(pageAdapter.getPageTitle(1)).setTabListener(this));
+        actionBar.addTab(actionBar.newTab().setText(pageAdapter.getPageTitle(2)).setTabListener(this));
     }
 
-
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+        pager.setCurrentItem(tab.getPosition());
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {}
+
+    @Override
+    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {}
+
+    private class MainPagerAdapter extends FragmentPagerAdapter {
+
+        public MainPagerAdapter(FragmentManager fm) {
+            super(fm);
         }
 
-        if (id == android.R.id.home) {
-            if (isOpenDrawer()) {
-                closeDrawer();
-            } else {
-                openDrawer();
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 1:
+                    return MyCardsFragment.newInstance();
+                case 2:
+                    return RankingFragment.newInstance();
+                default:
+                    return CurrentFragment.newInstance();
             }
-            return true;
         }
-        return super.onOptionsItemSelected(item);
-    }
 
-    private void configureDrawer() {
-        // set a custom shadow that overlays the main content when the drawer opens
-        drawer.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-        // set up the drawer's list view with items and click listener
+        @Override
+        public int getCount() {
+            return 3;
+        }
 
-        //getActionBar().setHomeButtonEnabled(true);
-
-        // ActionBarDrawerToggle ties together the the proper interactions
-        // between the sliding drawer and the action bar app icon
-        drawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                drawer,         /* DrawerLayout object */
-                R.drawable.ic_drawer,  /* nav drawer image to replace 'Up' caret */
-                R.string.drawer_open,  /* "open drawer" description for accessibility */
-                R.string.drawer_close  /* "close drawer" description for accessibility */
-        ) {
-            public void onDrawerClosed(View view) {
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-
-            public void onDrawerOpened(View drawerView) {
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-        };
-        drawer.setDrawerListener(drawerToggle);
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        drawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggls
-        drawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    private void configureActionBar() {
-        // enable ActionBar app icon to behave as action to toggle nav drawer
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    private void openDrawer() {
-        drawer.openDrawer(drawerView);
-    }
-
-    private void closeDrawer() {
-        drawer.closeDrawer(drawerView);
-    }
-
-    private boolean isOpenDrawer() {
-        return drawer.isDrawerOpen(drawerView);
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return getString(tabTitles[position]);
+        }
     }
 }
