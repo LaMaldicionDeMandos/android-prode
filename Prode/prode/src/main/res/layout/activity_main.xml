@@ -1,5 +1,17 @@
-<org.pasut.prode.views.NoSwipableViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.pasut.prode.MainActivity"
+    >
+    <org.pasut.prode.views.NoSwipableViewPager xmlns:android="http://schemas.android.com/apk/res/android"
                                    android:id="@+id/pager"
                                    android:layout_width="match_parent"
                                    android:layout_height="match_parent">
-</org.pasut.prode.views.NoSwipableViewPager>
+    </org.pasut.prode.views.NoSwipableViewPager>
+
+    <include layout="@layout/view_leagues"/>
+
+</android.support.v4.widget.DrawerLayout>
