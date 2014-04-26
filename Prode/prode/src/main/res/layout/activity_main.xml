@@ -6,12 +6,31 @@
     android:layout_height="match_parent"
     tools:context="org.pasut.prode.MainActivity"
     >
-    <org.pasut.prode.views.NoSwipableViewPager xmlns:android="http://schemas.android.com/apk/res/android"
-                                   android:id="@+id/pager"
-                                   android:layout_width="match_parent"
-                                   android:layout_height="match_parent">
-    </org.pasut.prode.views.NoSwipableViewPager>
 
-    <include layout="@layout/view_fixtures"/>
+    <android.support.v4.app.FragmentTabHost android:id="@+id/tab_host"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"/>
+            <FrameLayout android:id="@android:id/tabcontent"
+                         android:layout_width="match_parent"
+                         android:layout_height="match_parent" />
+        </LinearLayout>
+
+    </android.support.v4.app.FragmentTabHost>
+
+    <fragment android:id="@+id/drawer_view"
+              android:layout_width="280dp"
+              android:layout_height="match_parent"
+              android:layout_gravity="start"
+              android:name="org.pasut.prode.fragments.FixtureFragment"
+        />
 
 </android.support.v4.widget.DrawerLayout>

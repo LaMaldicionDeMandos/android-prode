@@ -6,7 +6,7 @@ import com.google.common.collect.Maps;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 
-import org.pasut.prode.services.PersisterHelper;
+import org.pasut.prode.entities.helpers.PersisterHelper;
 import org.pasut.prode.services.PersisterService;
 
 import java.util.Map;

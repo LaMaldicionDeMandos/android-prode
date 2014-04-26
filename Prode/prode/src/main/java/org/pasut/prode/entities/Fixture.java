@@ -9,6 +9,7 @@ import android.os.Parcelable;
 public class Fixture implements Entity, Parcelable {
     private final String _id;
     private final String name;
+    private final String description;
 
     public String getName() {
         return name;
@@ -17,8 +18,6 @@ public class Fixture implements Entity, Parcelable {
     public String getDescription() {
         return description;
     }
-
-    private final String description;
 
     @Override
     public String getId() {
