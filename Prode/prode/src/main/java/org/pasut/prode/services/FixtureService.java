@@ -9,5 +9,5 @@ import java.util.List;
  * Created by marcelo on 26/04/14.
  */
 public interface FixtureService {
-    List<Fixture> findAvailableFixtures(Date date);
+    void findAvailableFixtures(Date date, PersisterService.FindCallback<List<Fixture>> callback);
 }

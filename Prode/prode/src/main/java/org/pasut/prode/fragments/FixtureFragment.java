@@ -1,22 +1,28 @@
 package org.pasut.prode.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.TextView;
+
+import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
 import org.pasut.prode.R;
 import org.pasut.prode.entities.Fixture;
+import org.pasut.prode.services.FixtureService;
+import org.pasut.prode.services.PersisterService;
 
+import java.util.Calendar;
 import java.util.List;
 
-public class FixtureFragment extends Fragment implements AbsListView.OnItemClickListener {
+import roboguice.fragment.RoboFragment;
+
+public class FixtureFragment extends RoboFragment implements AbsListView.OnItemClickListener {
     /**
      * The fragment's ListView/GridView.
      */
@@ -26,9 +32,12 @@ public class FixtureFragment extends Fragment implements AbsListView.OnItemClick
      * The Adapter which will be used to populate the ListView/GridView with
      * Views.
      */
-    private ListAdapter mAdapter;
+    private ArrayAdapter<Fixture> adapter;
 
-    private List<Fixture> fixtures;
+    private List<Fixture> fixtures = Lists.newArrayList();
+
+    @Inject
+    private FixtureService fixtureService;
 
     // TODO: Rename and change types of parameters
     public static FixtureFragment newInstance() {
@@ -48,10 +57,19 @@ public class FixtureFragment extends Fragment implements AbsListView.OnItemClick
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // TODO: Change Adapter to display your content
-        mAdapter = new ArrayAdapter<Fixture>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, fixtures);
+        adapter = new ArrayAdapter<Fixture>(getActivity(),
+                android.R.layout.simple_list_item_1, fixtures);
+
+        fixtureService.findAvailableFixtures(Calendar.getInstance().getTime(), new PersisterService.FindCallback<List<Fixture>>() {
+            @Override
+            public void onFound(List<Fixture> fixtures) {
+
+                FixtureFragment.this.fixtures.clear();
+                FixtureFragment.this.fixtures.addAll(fixtures);
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -61,7 +79,7 @@ public class FixtureFragment extends Fragment implements AbsListView.OnItemClick
 
         // Set the adapter
         mListView = (AbsListView) view.findViewById(android.R.id.list);
-        //mListView.setAdapter(mAdapter);
+        mListView.setAdapter(adapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);

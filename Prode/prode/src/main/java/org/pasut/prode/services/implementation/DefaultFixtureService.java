@@ -24,8 +24,9 @@ public class DefaultFixtureService implements FixtureService {
         this.helper = helper;
         this.persisterService = persisterService;
     }
+
     @Override
-    public List<Fixture> findAvailableFixtures(Date date) {
-        return null;
+    public void findAvailableFixtures(Date date, PersisterService.FindCallback<List<Fixture>> callback) {
+        persisterService.findAll(helper, callback);
     }
 }
