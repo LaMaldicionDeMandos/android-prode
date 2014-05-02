@@ -16,6 +16,7 @@ import org.pasut.prode.R;
 import org.pasut.prode.entities.Fixture;
 import org.pasut.prode.services.FixtureService;
 import org.pasut.prode.services.PersisterService;
+import org.pasut.prode.views.FixtureArrayAdapter;
 
 import java.util.Calendar;
 import java.util.List;
@@ -58,13 +59,11 @@ public class FixtureFragment extends RoboFragment implements AbsListView.OnItemC
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO: Change Adapter to display your content
-        adapter = new ArrayAdapter<Fixture>(getActivity(),
-                android.R.layout.simple_list_item_1, fixtures);
+        adapter = new FixtureArrayAdapter(getActivity(), fixtures);
 
         fixtureService.findAvailableFixtures(Calendar.getInstance().getTime(), new PersisterService.FindCallback<List<Fixture>>() {
             @Override
             public void onFound(List<Fixture> fixtures) {
-
                 FixtureFragment.this.fixtures.clear();
                 FixtureFragment.this.fixtures.addAll(fixtures);
                 adapter.notifyDataSetChanged();

@@ -28,4 +28,14 @@
         <item name="android:shadowRadius">2</item>
     </style>
 
+    <style name="DarkHeaderTextAppearance" parent="android:TextAppearance.Large" >
+        <item name="android:textSize">@dimen/header_text_size</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="DarkDetailTextAppearance" parent="android:TextAppearance.Large" >
+        <item name="android:textSize">@dimen/detail_text_size</item>
+        <item name="android:textColor">@color/ligth_grey_color</item>
+    </style>
+
 </resources>
