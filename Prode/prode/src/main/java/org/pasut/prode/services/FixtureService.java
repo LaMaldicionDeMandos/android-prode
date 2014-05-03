@@ -1,6 +1,7 @@
 package org.pasut.prode.services;
 
 import org.pasut.prode.entities.Fixture;
+import org.pasut.prode.services.datastorage.PersisterService;
 
 import java.util.Date;
 import java.util.List;

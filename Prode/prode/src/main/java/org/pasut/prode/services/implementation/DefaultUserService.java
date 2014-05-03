@@ -5,7 +5,7 @@ import com.google.inject.Inject;
 import org.pasut.prode.ProdeApplication;
 import org.pasut.prode.authentication.User;
 import org.pasut.prode.entities.helpers.UserPersisterHelper;
-import org.pasut.prode.services.PersisterService;
+import org.pasut.prode.services.datastorage.PersisterService;
 import org.pasut.prode.services.PreferencesService;
 import org.pasut.prode.services.UserService;
 

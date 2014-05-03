@@ -15,7 +15,7 @@ import com.google.inject.Inject;
 import org.pasut.prode.R;
 import org.pasut.prode.entities.Fixture;
 import org.pasut.prode.services.FixtureService;
-import org.pasut.prode.services.PersisterService;
+import org.pasut.prode.services.datastorage.PersisterService;
 import org.pasut.prode.views.FixtureArrayAdapter;
 
 import java.util.Calendar;

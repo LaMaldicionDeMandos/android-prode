@@ -14,10 +14,10 @@ import java.util.Map;
 @Singleton
 public class FixturePersisterHelper implements PersisterHelper<Fixture> {
     private final static String TABLE_NAME = "Fixture";
-    private final static String _ID = "objectId";
-    private final static String NAME = "name";
-    private final static String DESCRIPTION = "description";
-    private final static String CLOSE_DATE = "to";
+    public final static String _ID = "objectId";
+    public final static String NAME = "name";
+    public final static String DESCRIPTION = "description";
+    public final static String CLOSE_DATE = "to";
     @Override
     public Map<String, Object> toMap(Fixture fixture) {
         Map<String, Object> map = Maps.newHashMap();

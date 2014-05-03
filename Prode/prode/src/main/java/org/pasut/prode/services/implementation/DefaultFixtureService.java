@@ -6,7 +6,7 @@ import com.google.inject.Singleton;
 import org.pasut.prode.entities.Fixture;
 import org.pasut.prode.entities.helpers.FixturePersisterHelper;
 import org.pasut.prode.services.FixtureService;
-import org.pasut.prode.services.PersisterService;
+import org.pasut.prode.services.datastorage.PersisterService;
 
 import java.util.Date;
 import java.util.List;
@@ -27,6 +27,8 @@ public class DefaultFixtureService implements FixtureService {
 
     @Override
     public void findAvailableFixtures(Date date, PersisterService.FindCallback<List<Fixture>> callback) {
-        persisterService.findAll(helper, callback);
+        PersisterService.CriteriaBuilder builder = persisterService.getCriteriaBuilder(helper);
+        builder.withGt(FixturePersisterHelper.CLOSE_DATE, new Date());
+        persisterService.find(helper, builder, callback);
     }
 }
